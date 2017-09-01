@@ -1,0 +1,1 @@
+* * * * * root echo "$(date +\%Y-\%m-\%d_\%T" "\%Z) - testing cron" >> /var/log/cron.log 2>&1
