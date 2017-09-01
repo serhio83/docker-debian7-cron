@@ -1,10 +1,12 @@
 FROM debian:7
 MAINTAINER Serhio <syrus.sergey@gmail.com>
 
-RUN apt-get -y -q update && apt-get -y -q install cron
+RUN export DEBIAN_FRONTEND=noninteractive \
+	&& apt-get -qqy update \
+	&& apt-get -qqy upgrade \
+	&& apt-get -qqy install cron
 
-ADD cronfile /etc/cron.d/cronjob
+ADD start.sh /start.sh
+ADD cron_command.sh /cron_command.sh
 
-RUN touch /var/log/cron.log
-
-CMD ["cron", "-f"]
+CMD ["/start.sh"]
